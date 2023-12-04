@@ -1,0 +1,228 @@
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
+
+// app.use(cookieParser());
+
+
+// if (process.env.NODE_ENV === 'production') {
+//   const __dirname = path.resolve();
+//   app.use(express.static(path.join(__dirname, '/frontend/dist')));
+
+//   app.get('*', (req, res) =>
+//     res.sendFile(path.resolve(__dirname, 'frontend', 'dist', 'index.html'))
+//   );
+// } else {
+//   app.get('/', (req, res) => {
+//     res.send('API is running....');
+//   });
+// }
+
+// app.use(notFound);
+// app.use(errorHandler);
+
+
+// const login = asyncHandler(async (req, res) => {
+//   const { username, password } = req.body;
+//   const user = await userModel.findOne({ username });
+//   if (!user) throw new Error("Invalid credentials");
+//   const result = await bcrypt.compare(password, user.password);
+//   if (!result) {
+//     throw new Error("Invalid Password");
+//   } else {
+//     if (!user.emailVerified) {
+//       return res.status(401).send({
+//         message:
+//           "Account not verified. Check your email for the verification link.",
+//       });
+//     }
+//     const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, {
+//       expiresIn: "1h",
+//     });
+//     res.send({ message: "Login SuccessFully", token });
+//   }
+// });
+
+
+// var i = 100;
+// for (let index = 0; index < i.length; index++) {
+//   console.log(i);
+// }
+
+// const isBrowser = typeof window === 'object' && typeof document === 'object'
+// console.log(isBrowser);
+
+// const isNode = typeof process !== 'undefined' && process.versions != null && process.versions.node !== null
+// console.log(isNode);
+
+
+// if (user) {
+    //   res.json({ message: "Registered Successfully" });
+    //   const emailVerificationToken = jwt.sign(
+    //     {
+    //       email: req.body.email,
+    //     },
+    //     process.env.SECRET_KEY,
+    //     {
+    //       expiresIn: "1d",
+    //     }
+    //   );
+    //   const verificationURL = `http://localhost:5173/verifyEmail/?token=${emailVerificationToken}`;
+    //   const html = `
+    //       <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f5f5f5;">
+    //         <div style="text-align: center; padding-bottom: 20px;">
+    //           <h1 style="color: #333; font-size: 28px; margin-bottom: 10px;">Welcome to Digital Sub Platform</h1>
+    //           <h1 style="color: #333; font-size: 28px; margin-bottom: 10px;">Email Verification</h1>
+    //           <p style="color: #666; font-size: 16px;">Enjoy highly Data, VTU and Utility Bills to friends and family and make cool cash.</p>
+    //         </div>
+
+    //         <div style="background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    //           <p style="color: #333; font-size: 16px;">Thank you for registering on our website! To complete the registration process, please click the button below to verify your email address:</p>
+    //           <a style="display: inline-block; padding: 10px 20px; background-color: #3490dc; color: #fff; text-decoration: none; border-radius: 4px; margin-top: 10px;"class="verification-link" href=${verificationURL}>Verify Email</a>
+    //         </div>
+    //         <div style="text-align: center; padding-top: 20px;">
+    //           <p style="color: #666; font-size: 16px;">If you did not sign up for our website, please ignore this email.</p>
+    //         </div>
+    //       </div>`;
+
+    //   const transporter = nodemailer.createTransport({
+    //     service: "gmail",
+    //     auth: {
+    //       user: process.env.SENDER_EMAIL,
+    //       pass: process.env.SENDER_PASSWORD,
+    //     },
+    //   });
+
+    //   const mailOptions = {
+    //     from: process.env.SENDER_EMAIL,
+    //     to: req.body.email,
+    //     subject: "Email Verification Link",
+    //     html: html,
+    //   };
+
+    //   transporter.sendMail(mailOptions, (error, info) => {
+    //     if (error) {
+    //       console.log(error);
+    //       throw new Error("Email could not be sent");
+    //     } else {
+    //       res.status(200).json({ message: "Email Sent SuccessFully" });
+    //     }
+    //   });
+    // }
+
+
+
+    // const register = asyncHandler(async (req, res) => {
+//   const form = new userModel({
+//     fullname: req.body.fullName,
+//     username: req.body.userName,
+//     email: req.body.email,
+//     phone: req.body.phoneNumber,
+//     address: req.body.address,
+//     gender: req.body.gender,
+//     dateOfBirth: req.body.dateOfBirth,
+//     password: req.body.password,
+//     currentDevice: req.body.currentDevice,
+//     emailVerified: false,
+//   });
+//   const searchCriteria = {
+//     $or: [
+//       { email: { $regex: String(req.body.email), $options: "i" } },
+//       { username: { $regex: String(req.body.username), $options: "i" } },
+//       { phone: String(req.body.phone) },
+//     ],
+//   };
+
+//   try {
+//     const userExists = await userModel.findOne(searchCriteria);
+//     if (userExists) {
+//       res.status(400);
+//       throw new Error("User Already Exists");
+//     }
+//     // hash the password
+
+//     const user = await form.save();
+//     if (user) {
+//       generateToken(res, user._id);
+//       res.status(201).json({
+//         _id: user._id,
+//         fullname: user.fullname,
+//         username: user.username,
+//         email: user.email,
+//         phone: user.phone,
+//         address: user.address,
+//         gender: user.gender,
+//         dateOfBirth: user.dateOfBirth,
+//         password: user.password,
+//         pin: user.pin,
+//         resellerAccess: user.resellerAccess,
+//         currentDevice: user.currentDevice,
+//         createdAt: user.createdAt,
+//         emailVerified: user.emailVerified,
+//         userType: user.userType,
+//         balance: user.balance,
+//         commission: user.commission,
+//         isAdmin: user.isAdmin,
+//       });
+//       const emailVerificationToken = jwt.sign(
+//         {
+//           email: req.body.email,
+//         },
+//         process.env.SECRET_KEY,
+//         {
+//           expiresIn: "1d",
+//         }
+//       );
+//       res.json({ message: "Registered Successfully" });
+//       const user = await form.save();
+//       const verificationURL = `http://localhost:5173/verifyEmail/?${emailVerificationToken}`;
+//       const html = `
+//         <div style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f5f5f5;">
+//           <div style="text-align: center; padding-bottom: 20px;">
+//             <h1 style="color: #333; font-size: 28px; margin-bottom: 10px;">Welcome to Digital Sub Platform</h1>
+//             <h1 style="color: #333; font-size: 28px; margin-bottom: 10px;">Email Verification</h1>
+//             <p style="color: #666; font-size: 16px;">Enjoy highly Data, VTU and Utility Bills to friends and family and make cool cash.</p>
+//           </div>
+
+//           <div style="background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+//             <p style="color: #333; font-size: 16px;">Thank you for registering on our website! To complete the registration process, please click the button below to verify your email address:</p>
+//             <a style="display: inline-block; padding: 10px 20px; background-color: #3490dc; color: #fff; text-decoration: none; border-radius: 4px; margin-top: 10px;"class="verification-link" href=${verificationURL}>Verify Email</a>
+//           </div>
+//           <div style="text-align: center; padding-top: 20px;">
+//             <p style="color: #666; font-size: 16px;">If you did not sign up for our website, please ignore this email.</p>
+//           </div>
+//         </div>`;
+
+//       const transporter = nodemailer.createTransport({
+//         service: "gmail",
+//         auth: {
+//           user: process.env.SENDER_EMAIL,
+//           pass: process.env.SENDER_PASSWORD,
+//         },
+//       });
+
+//       const mailOptions = {
+//         from: process.env.SENDER_EMAIL,
+//         to: req.body.email,
+//         subject: "Email Verification Link",
+//         html: html,
+//         replyTo: "noreply@example.com",
+//       };
+
+//       transporter.sendMail(mailOptions, (error, info) => {
+//         if (error) {
+//           throw new Error("Email could not be sent");
+//         } else {
+//           res.send({ message: "Email Sent SuccessFully" });
+//           res.status(200).json({ message: "Email Sent SuccessFully" });
+//         }
+//       });
+//       res.status(200).json({ message: "Registered Successfully" });
+//     } else {
+//       res.status(400);
+//       throw new Error("Unable To Register");
+//     }
+//   } catch (error) {
+//     res.status(400).json({ message: "Invalid user data" });
+//     console.log(error);
+//   }
+// });
